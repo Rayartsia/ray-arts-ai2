@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#00d9ff"><meta name="description" content="Ray Arts AI — ferramentas inteligentes para tatuadores">
+<link rel="manifest" href="manifest.json">
+<title>Ray Arts AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#effcff;color:#102027;font-family:Arial,sans-serif}.app{max-width:520px;margin:auto;min-height:100vh;background:#fff}
+header{padding:27px 20px;background:linear-gradient(145deg,#fff,#e5fcff);border-bottom:1px solid #d9f7fb}.logo{font-size:25px;font-weight:900}.logo span{color:#00cfe9}.sub{font-size:12px;color:#718187;margin-top:4px}
+main{padding:20px}h1{font-size:22px;margin:3px 0 5px}.intro{font-size:13px;color:#74848a;margin-bottom:18px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.tool{position:relative;border:1px solid #dbecef;background:#fff;border-radius:18px;padding:17px 14px;min-height:145px;text-align:left;box-shadow:0 5px 18px #00b8d90d}.icon{width:42px;height:42px;border-radius:13px;background:#ddfbff;color:#00bcd7;display:flex;align-items:center;justify-content:center;font-size:21px;margin-bottom:13px}.tool strong{display:block;font-size:15px}.tool p{font-size:11px;line-height:1.45;color:#718187}.arrow{position:absolute;right:13px;bottom:11px;color:#00cfe9;font-size:20px}
+.screen{display:none}.back{border:0;background:#e5fbff;color:#00a9c2;border-radius:10px;padding:9px 12px;font-weight:700;margin-bottom:16px}.card{border:1px solid #dbecef;border-radius:17px;padding:16px;margin-bottom:13px}.upload{display:block;border:1.5px dashed #67ddec;border-radius:14px;padding:27px;text-align:center;background:#f8feff}.upload input{display:none}.preview{display:none;max-width:100%;max-height:270px;margin:12px auto;border-radius:12px}.opts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.opt{border:1px solid #d7e6e9;background:#fff;border-radius:10px;padding:11px 5px;font-weight:700;font-size:12px}.opt.active{background:#00cfe9;color:#fff;border-color:#00cfe9}.range{width:100%;accent-color:#00cfe9}.row{display:flex;justify-content:space-between;font-size:13px;margin:11px 0 4px}.primary{width:100%;padding:15px;border:0;border-radius:13px;background:#00cfe9;color:#fff;font-weight:900;font-size:15px}.note{font-size:11px;color:#75858a;line-height:1.45;margin-top:10px}
+</style></head>
+<body><div class="app">
+<header><div class="logo">RAY ARTS <span>AI</span></div><div class="sub">Ferramentas inteligentes para tatuadores</div></header>
+<main>
+<section id="home"><h1>O que você quer criar?</h1><div class="intro">Escolha uma ferramenta para começar.</div><div class="grid">
+<button class="tool" onclick="show('stencil')"><div class="icon">🖨️</div><strong>Decalque</strong><p>Preparar desenhos limpos para impressão térmica.</p><span class="arrow">›</span></button>
+<button class="tool" onclick="soon('Realismo')"><div class="icon">🖤</div><strong>Realismo</strong><p>Projetos Black & Grey com luz e sombra.</p><span class="arrow">›</span></button>
+<button class="tool" onclick="soon('Fine Line')"><div class="icon">✒️</div><strong>Fine Line</strong><p>Desenhos delicados e minimalistas.</p><span class="arrow">›</span></button>
+<button class="tool" onclick="soon('Composição')"><div class="icon">🧩</div><strong>Composição</strong><p>Combinar várias referências.</p><span class="arrow">›</span></button>
+</div></section>
+
+<section id="stencil" class="screen"><button class="back" onclick="show('home')">← Voltar</button><h1>Decalque</h1><div class="intro">Prepare sua referência para transferência.</div>
+<div class="card"><label class="upload"><b>＋ Adicionar referência</b><br><span style="font-size:11px;color:#74848a">Escolha uma imagem do celular</span><input id="file" type="file" accept="image/*"></label><img id="preview" class="preview"></div>
+<div class="card"><b style="font-size:14px">Nível do decalque</b><div class="opts" style="margin-top:10px"><button class="opt active">Delicado</button><button class="opt">Médio</button><button class="opt">Detalhado</button></div>
+<div class="row"><span>Detalhamento</span><b id="dv">55%</b></div><input id="detail" class="range" type="range" min="0" max="100" value="55">
+<div class="row"><span>Delicadeza da linha</span><b id="lv">45%</b></div><input id="line" class="range" type="range" min="0" max="100" value="45"></div>
+<div class="card"><div class="row"><span>Formato</span><select id="format"><option>A4</option><option>A5</option><option>Personalizado</option></select></div><div class="row"><span>Espelhar para transferência</span><input id="mirror" type="checkbox" checked></div></div>
+<div class="card"><button class="primary" onclick="generate()">✨ GERAR DECALQUE</button><div id="status" class="note">Nesta versão de teste, o próximo passo é conectar o motor de IA.</div></div>
+</section>
+</main></div>
+<script>
+function show(id){document.getElementById('home').style.display=id==='home'?'block':'none';document.getElementById('stencil').style.display=id==='stencil'?'block':'none'}
+function soon(n){alert(n+' será liberado em uma atualização futura.')}
+file.onchange=()=>{if(file.files[0]){preview.src=URL.createObjectURL(file.files[0]);preview.style.display='block'}}
+detail.oninput=()=>dv.textContent=detail.value+'%';line.oninput=()=>lv.textContent=line.value+'%'
+document.querySelectorAll('.opts .opt').forEach(b=>b.onclick=()=>{document.querySelectorAll('.opts .opt').forEach(x=>x.classList.remove('active'));b.classList.add('active')})
+function generate(){if(!file.files[0]){status.textContent='Adicione uma referência primeiro.';return}status.textContent='Referência preparada. A conexão com a IA será adicionada na próxima versão.'}
+</script></body></html>

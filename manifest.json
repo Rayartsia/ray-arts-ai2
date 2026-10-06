@@ -1,0 +1,10 @@
+{
+  "name": "Ray Arts AI",
+  "short_name": "Ray Arts AI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#00d9ff",
+  "lang": "pt-BR",
+  "icons": []
+}
