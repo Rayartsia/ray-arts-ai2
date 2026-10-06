@@ -89,7 +89,7 @@ como base para decalque térmico.
           "Authorization": `Bearer ${process.env.OPENAI_API_KEY}`
         },
         body: JSON.stringify({
-          model: "gpt-5.6",
+          model: "gpt-6-astra",
           input: [
             {
               role: "user",
@@ -117,8 +117,6 @@ como base para decalque térmico.
               size: "auto"
             }
           ],
-          tool_choice: {
-            type: "image_generation"
           }
         })
       }
