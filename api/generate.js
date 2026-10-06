@@ -117,7 +117,7 @@ como base para decalque térmico.
               size: "auto"
             }
           ],
-          }
+          
         })
       }
     );
